@@ -3,31 +3,29 @@ from __future__ import annotations
 import datetime
 import os
 import subprocess
-from typing import (
-    Any,
-    Dict,
-    List,
-    Optional,
-    Literal,
-    Tuple,
-    Union,
-    Sequence,
-    Iterable,
-    cast,
-)
 import uuid
+from typing import Any
+from typing import Dict
+from typing import Iterable
+from typing import List
+from typing import Literal
+from typing import Optional
+from typing import Sequence
+from typing import Tuple
+from typing import Union
+from typing import cast
 
 from pydantic import parse_raw_as
 
-from .exceptions import (
-    ClientError,
-    ClientUsageError,
-    CommandError,
-    MultipleObjectsFound,
-    NotFound,
-)
-from .types import DictFilterSpec, FilterSpec, StdoutStderr
+from .exceptions import ClientError
+from .exceptions import ClientUsageError
+from .exceptions import CommandError
+from .exceptions import MultipleObjectsFound
+from .exceptions import NotFound
 from .task import Task
+from .types import DictFilterSpec
+from .types import FilterSpec
+from .types import StdoutStderr
 from .utils import convert_dict_to_override_args
 
 
@@ -36,7 +34,7 @@ class Client:
     _config_filename: str
     _config_overrides: Dict[str, Any] = {
         "verbose": "nothing",
-        "json": {"array": "TRUE"},
+        "json": {"array": "TRUE", "depends": {"array": "on"}},
         "confirmation": "no",
         "dependency": {
             "confirmation": "no",

@@ -1,12 +1,14 @@
 import datetime
-from typing import List, Optional, Literal
+from typing import List
+from typing import Literal
+from typing import Optional
 from uuid import UUID
 
 import dateutil.parser
 import pytz
-
-from pydantic import BaseModel, Extra, validator
-
+from pydantic import BaseModel
+from pydantic import Extra
+from pydantic import validator
 
 DATETIME_FORMAT = "%Y%m%dT%H%M%SZ"
 
@@ -36,7 +38,7 @@ class Annotation(TaskwarriorJsonModel):
 
 class Task(TaskwarriorJsonModel, extra=Extra.allow):
     annotations: Optional[List[Annotation]]
-    depends: Optional[str]
+    depends: Optional[List[UUID]]
     description: str
     due: Optional[datetime.datetime]
     end: Optional[datetime.datetime]
@@ -79,29 +81,3 @@ class Task(TaskwarriorJsonModel, extra=Extra.allow):
 
         self.annotations = self.annotations or []
         self.annotations.append(annotation)
-
-    def get_depends(self) -> List[UUID]:
-        if self.depends:
-            return [UUID(dep) for dep in self.depends.split(",") if dep]
-
-        return []
-
-    def add_to_depends(self, dep: UUID):
-        uuids = self.get_depends()
-
-        if dep in uuids:
-            raise ValueError(f"task already depends on {dep}")
-
-        uuids.append(dep)
-
-        self.depends = ",".join([str(dep) for dep in uuids])
-
-    def remove_from_depends(self, dep: UUID):
-        uuids = self.get_depends()
-
-        if dep not in uuids:
-            raise ValueError(f"task does not depend upon {dep}")
-
-        uuids.remove(dep)
-
-        self.depends = ",".join([str(dep) for dep in uuids])

@@ -2,14 +2,17 @@ import datetime
 import os
 import shutil
 import tempfile
-from unittest import TestCase
 import uuid
+from unittest import TestCase
 
-import pytz
 import pytest
+import pytz
 
-from ..client import Client, Q
-from ..exceptions import ClientUsageError, NotFound, MultipleObjectsFound
+from ..client import Client
+from ..client import Q
+from ..exceptions import ClientUsageError
+from ..exceptions import MultipleObjectsFound
+from ..exceptions import NotFound
 from ..task import Task
 
 
@@ -204,28 +207,27 @@ class TestModify(TestClient):
         depends = self.client.get(uuid=self.TASK_UUID_WAKE_UP)
 
         existing = self.client.get(uuid=self.TASK_UUID_SLEEP)
-        existing.add_to_depends(depends.uuid)
+        existing.depends = [depends.uuid]
 
         self.client.modify(existing)
 
         retrieved = self.client.get(uuid=self.TASK_UUID_SLEEP)
 
-        assert len(retrieved.get_depends()) == 1
-        assert retrieved.get_depends()[0] == self.TASK_UUID_WAKE_UP
+        assert len(retrieved.depends) == 1
+        assert retrieved.depends[0] == self.TASK_UUID_WAKE_UP
 
     def test_remove_dependency(self):
         depends = self.client.get(uuid=self.TASK_UUID_WAKE_UP)
 
         existing = self.client.get(uuid=self.TASK_UUID_SLEEP)
-        existing.add_to_depends(depends.uuid)
-
+        existing.depends = [depends.uuid]
         self.client.modify(existing)
 
         retrieved = self.client.get(uuid=self.TASK_UUID_SLEEP)
+        retrieved.depends = []
 
-        retrieved.remove_from_depends(depends.uuid)
         self.client.modify(retrieved)
 
         retrieved_again = self.client.get(uuid=self.TASK_UUID_SLEEP)
 
-        assert len(retrieved_again.get_depends()) == 0
+        assert not retrieved_again.depends

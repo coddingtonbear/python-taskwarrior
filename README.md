@@ -166,5 +166,5 @@ Q objects accept all of the same parameter types described in "Finding tasks" ab
 - This has much more sophisticated filtering capabilities.
 - This uses a slightly simpler API for retrieving tasks -- rather than handing you a 2-tuple of values `(id, {data})` this just hands you a data object (or list of them).
 - This uses a third-party library ([Pydantic](https://pydantic-docs.helpmanual.io/)) for data serialization/deserialization so as to remove those responsibilities from the library itself (and hopefully make it somewhat easier to maintain).
-- This supports only modern versions of Taskwarrior.  Specifically: only versions of Taskwarrior newer than 2.5.0 are supported.
+- This supports only modern versions of Taskwarrior.  Specifically: only versions of Taskwarrior newer than 2.5.1 are supported.
 - This supports only currently supported versions of Python.  Specifically: only versions of Python currently receiving security updates are supported -- that means Python 3.7+ at the moment.
