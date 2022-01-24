@@ -1,12 +1,19 @@
+from __future__ import annotations
+
 import datetime
+from typing import Dict
 from typing import List
 from typing import Optional
+from typing import Type
 from uuid import UUID
 
 import dateutil.parser
 import pytz
 from pydantic import BaseModel
 from pydantic import Extra
+from pydantic import Field
+from pydantic import FieldInfo
+from pydantic import create_model
 from pydantic import validator
 from typing_extensions import Literal
 
@@ -81,3 +88,23 @@ class Task(TaskwarriorJsonModel, extra=Extra.allow):  # type: ignore[call-arg]
 
         self.annotations = self.annotations or []
         self.annotations.append(annotation)
+
+    @classmethod
+    def with_udas(cls, *uda_definitions: UdaConfig) -> Type[Task]:
+        fields: Dict[str, FieldInfo] = {}
+
+        for uda in uda_definitions:
+            pass
+
+        return create_model("TaskWithUdas", __base__=cls, **fields)
+
+
+class UdaConfig(BaseModel):
+    field_type: Literal["numeric", "date", "duration", "string"] = Field(alias="type")
+    label: str
+    values: Optional[List[str]]
+
+    @validator("values", pre=True)
+    @classmethod
+    def values_validator(cls, v) -> List[str]:
+        return v.split(",")
