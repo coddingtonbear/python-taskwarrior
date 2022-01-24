@@ -127,7 +127,7 @@ class Client:
     ) -> List[Task]:
         q = Q(*params, **dictparams)
 
-        stdout, _ = self._execute("export", q.serialize())
+        stdout, _ = self._execute(q.serialize(), "export")
 
         return parse_raw_as(List[Task], stdout)
 
@@ -136,7 +136,7 @@ class Client:
     ) -> int:
         q = Q(*params, **dictparams)
 
-        stdout, _ = self._execute("count", q.serialize())
+        stdout, _ = self._execute(q.serialize(), "count")
 
         return int(stdout)
 
