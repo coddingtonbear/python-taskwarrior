@@ -25,7 +25,7 @@ pip install https://github.com/coddingtonbear/taskwarrior/archive/master.zip
 >>> client = Client()
 >>> tasks = client.filter(status='pending')
 [Task(annotations=None, depends=None, description='Wake up', due=None, end=None, entry=datetime.datetime(2022, 1, 24, 4, 28, 11, tzinfo=tzutc()), id=1, imask=None, mask=None, modified=datetime.datetime(2022, 1, 24, 4, 28, 51, tzinfo=tzutc()), parent=None, project=None, recur=None, scheduled=None, start=None, status='pending', tags=['alarm'], until=None, urgency=0.8, uuid=UUID('a39ea0fa-682a-4815-9556-8b6785ee301c'), wait=None)]
->>> 
+>>>
 ```
 
 # Examples
@@ -44,13 +44,13 @@ The `filter` method is used for finding tasks:
 It accepts as parameters any of the following:
 
 - Any number of keyword arguments:
-  - Double-underscores are transformed into a `.` when sending the filter to Taskwarrior so as to allow you to use filters like `description.contains` or `due.after`.
   - Example of filter keyword arguments include:
     - `status='pending'`
     - `description__contains='Some string'`
     - `due__after='yesterday'`
+  - Double-underscores are transformed into a `.` when sending the filter to Taskwarrior so as to allow you to use filters like `description.contains` or `due.after`.
 - Any number of filter dictionaries:
-  - These work much the same way as keyword arguments described above, but allow you to specify these as a raw dictionary instead.
+  - These work much the same way as keyword arguments described above, but allow you to specify these as raw dictionaries instead.
 - Any number of raw strings:
   - E.g. for filtering to tasks having only a certain tag, you can provide as a value `+mytag`.
 - Any number of `Q` objects:
