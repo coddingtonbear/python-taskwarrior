@@ -1,5 +1,6 @@
 # flake8: noqa
-from .client import Client, Q
+from .client import Client
+from .client import Q
 from .task import Task
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
