@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8]
-        taskwarrior-version: [2.5.0, 2.5.1, 2.5.3]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
+        taskwarrior-version: ["2.5.0", "2.5.1", "2.5.3"]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{matrix.python-version}}
@@ -35,4 +35,4 @@ jobs:
         python -m pip install pytest
     - name: Run Tests
       run: |
-        pytest
+        pytest src/
