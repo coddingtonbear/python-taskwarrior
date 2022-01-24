@@ -140,7 +140,23 @@ You can provide the following parameters when instantiating your client:
 
 # Using Q Objects
 
-You can provide any of the following types of objects to 
+Q objects (inspired by [Django's objects of the same name](https://docs.djangoproject.com/en/4.0/topics/db/queries/#s-complex-lookups-with-q-objects) can be used for building complex logical queries for filtering your tasks.
+
+Q objects accept all of the same parameter types described in "Finding tasks" above, but can also be `or` or `and`-ed together using `|` or `&`:
+
+```python
+>>> from taskwarrior import Client, Q
+>>> import pytz
+>>> client = Client()
+>>> client.filter(
+        Q(status='pending') | Q(
+            status='waiting',
+            due__before=pytz.timezone('America/Los_Angeles').localize(
+                datetime.datetime.utcnow() + datetime.timedelta(days=7)
+            )
+        )
+    )
+```
 
 # How does this differ from [taskw](https://github.com/ralphbean/taskw)?
 
