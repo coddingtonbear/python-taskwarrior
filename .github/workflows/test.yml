@@ -1,0 +1,38 @@
+name: Run Tests
+on:
+  push:
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8]
+        taskwarrior-version: [2.5.0, 2.5.1, 2.5.3]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{matrix.python-version}}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{matrix.python-version}}
+    - name: Install Taskwarrior ${{matrix.taskwarrior-version}}
+      run: |
+        sudo apt-get install -y python-dev cmake build-essential libgnutls28-dev uuid-dev gnutls-bin chrpath libssl-dev libfontconfig1-dev
+        git clone https://github.com/GothenburgBitFactory/taskwarrior.git
+        cd taskwarrior
+        git checkout v${{matrix.taskwarrior-version}}
+        cmake .
+        make
+        sudo make install
+        task --version
+        cd ../
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools
+        python setup.py install
+        python -m pip install pytest
+    - name: Run Tests
+      run: |
+        pytest
