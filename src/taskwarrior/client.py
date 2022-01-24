@@ -8,7 +8,6 @@ from typing import Any
 from typing import Dict
 from typing import Iterable
 from typing import List
-from typing import Literal
 from typing import Optional
 from typing import Sequence
 from typing import Tuple
@@ -16,6 +15,7 @@ from typing import Union
 from typing import cast
 
 from pydantic import parse_raw_as
+from typing_extensions import Literal
 
 from .exceptions import ClientError
 from .exceptions import ClientUsageError

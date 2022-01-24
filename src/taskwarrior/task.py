@@ -36,7 +36,7 @@ class Annotation(TaskwarriorJsonModel):
         return dateutil.parser.parse(v)
 
 
-class Task(TaskwarriorJsonModel, extra=Extra.allow):
+class Task(TaskwarriorJsonModel, extra=Extra.allow):  # type: ignore[call-arg]
     annotations: Optional[List[Annotation]]
     depends: Optional[List[UUID]]
     description: str
