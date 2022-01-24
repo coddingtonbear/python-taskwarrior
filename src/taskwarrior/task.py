@@ -1,6 +1,5 @@
 import datetime
 from typing import List
-from typing import Literal
 from typing import Optional
 from uuid import UUID
 
@@ -9,6 +8,7 @@ import pytz
 from pydantic import BaseModel
 from pydantic import Extra
 from pydantic import validator
+from typing_extensions import Literal
 
 DATETIME_FORMAT = "%Y%m%dT%H%M%SZ"
 
