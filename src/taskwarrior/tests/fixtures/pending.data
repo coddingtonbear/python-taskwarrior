@@ -1,2 +1,2 @@
-[description:"Wake up" entry:"1642998491" modified:"1642998531" status:"pending" tags:"alarm" uuid:"a39ea0fa-682a-4815-9556-8b6785ee301c"]
-[description:"Go to sleep" entry:"1642998511" modified:"1642998511" status:"pending" tags:"bedtime" uuid:"0189becf-a28b-497e-bd67-d04fa1ee3fa8"]
+[description:"Wake up" entry:"1642998491" modified:"1643040530" orphaned:"somevalue" status:"pending" tags:"alarm" uuid:"a39ea0fa-682a-4815-9556-8b6785ee301c"]
+[description:"Go to sleep" entry:"1642998511" estimate:"224" expires:"1893484800" modified:"1643040615" size:"medium" status:"pending" tags:"bedtime" uuid:"0189becf-a28b-497e-bd67-d04fa1ee3fa8"]

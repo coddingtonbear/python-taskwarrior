@@ -1,1 +1,11 @@
 data.location = .
+
+uda.size.type = string
+uda.size.label = Size
+uda.size.values = large,medium,small
+
+uda.estimate.type = numeric
+uda.estimate.label = Estimate
+
+uda.expires.type = date
+uda.expires.label = Expires

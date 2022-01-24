@@ -231,3 +231,13 @@ class TestModify(TestClient):
         retrieved_again = self.client.get(uuid=self.TASK_UUID_SLEEP)
 
         assert not retrieved_again.depends
+
+    def test_unexpected_uda(self):
+        task_with_orphaned_uda = self.client.get(uuid=self.TASK_UUID_WAKE_UP)
+
+        task_with_orphaned_uda.orphaned = "orphaned data"
+
+        self.client.modify(task_with_orphaned_uda)
+
+        retrieved = self.client.get(uuid=self.TASK_UUID_WAKE_UP)
+        assert retrieved.orphaned == task_with_orphaned_uda.orphaned
