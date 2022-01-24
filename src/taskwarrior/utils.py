@@ -1,4 +1,37 @@
+from typing import Any
+from typing import Dict
 from typing import List
+
+
+def convert_config_output_to_dict(output: str) -> Dict[str, Any]:
+    config: Dict[str, Any] = {}
+
+    for line in output.split("\n"):
+        comment_position = line.find("#")
+        if comment_position < 0:
+            line = line.strip()
+        else:
+            line = line[:comment_position].strip()
+
+        if not line:
+            continue
+
+        left, right = line.split("=", 1)
+        key_parts = left.strip().split(".")
+        value = right.strip()
+
+        cursor = config
+        for part in key_parts[0:-1]:
+            if part not in cursor:
+                cursor[part] = {}
+
+            if not isinstance(cursor[part], dict):
+                cursor[part] = {}
+
+            cursor = cursor[part]
+        cursor[key_parts[-1]] = value
+
+    return config
 
 
 def convert_dict_to_override_args(config, prefix="") -> List[str]:

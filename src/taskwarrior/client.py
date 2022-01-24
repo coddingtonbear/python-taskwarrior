@@ -26,6 +26,7 @@ from .task import Task
 from .types import DictFilterSpec
 from .types import FilterSpec
 from .types import StdoutStderr
+from .utils import convert_config_output_to_dict
 from .utils import convert_dict_to_override_args
 
 
@@ -41,6 +42,7 @@ class Client:
         },
         "recurrence": {"confirmation": "no"},
     }
+    _calculated_config: Dict[str, Any]
 
     def __init__(
         self,
@@ -56,7 +58,14 @@ class Client:
         )
         self._config_overrides.update(config_overrides or {})
 
+        stdout, _ = self._execute("_show")
+        self._calculated_config = convert_config_output_to_dict(stdout)
+
         super().__init__()
+
+    @property
+    def config(self) -> Dict[str, Any]:
+        return self._calculated_config
 
     def _execute(self, *args: str, stdin: str = "") -> StdoutStderr:
         command = [
