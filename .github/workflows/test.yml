@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10"]
-        taskwarrior-version: ["2.5.0", "2.5.1", "2.5.3"]
+        taskwarrior-version: ["2.5.1", "2.5.3", "2.6.0", "2.6.1"]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{matrix.python-version}}
