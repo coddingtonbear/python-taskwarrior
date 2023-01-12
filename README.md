@@ -14,7 +14,7 @@ You can also install the in-development version with:
 
 ```
 
-pip install https://github.com/coddingtonbear/taskwarrior/archive/master.zip
+pip install https://github.com/coddingtonbear/python-taskwarrior/archive/master.zip
 
 ```
 
