@@ -36,7 +36,7 @@ setup(
     ),
     author="Adam Coddington",
     author_email="me@adamcoddington.net",
-    url="https://github.com/coddingtonbear/taskwarrior",
+    url="https://github.com/coddingtonbear/python-taskwarrior",
     packages=find_packages("src"),
     package_dir={"": "src"},
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
@@ -65,9 +65,9 @@ setup(
     ],
     project_urls={
         "Changelog": (
-            "https://github.com/coddingtonbear/taskwarrior/blob/master/CHANGELOG.md"
+            "https://github.com/coddingtonbear/python-taskwarrior/blob/master/CHANGELOG.md"
         ),
-        "Issue Tracker": "https://github.com/coddingtonbear/taskwarrior/issues",
+        "Issue Tracker": "https://github.com/coddingtonbear/python-taskwarrior/issues",
     },
     keywords=[
         # eg: 'keyword1', 'keyword2', 'keyword3',
